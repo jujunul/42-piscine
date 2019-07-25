@@ -1,72 +1,77 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strs_to_tab.c                                   :+:      :+:    :+:   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthierry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 21:35:38 by jthierry          #+#    #+#             */
-/*   Updated: 2019/07/25 00:53:36 by jthierry         ###   ########.fr       */
+/*   Created: 2019/07/24 01:10:07 by jthierry          #+#    #+#             */
+/*   Updated: 2019/07/25 00:56:40 by jthierry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include <unistd.h>
 #include "ft_stock_str.h"
-
-#include <stdlib.h>
-
-char					*ft_strdup(char *src)
+void			ft_putchar(char c)
 {
-	int		len;
-	char	*cpy;
-
-	len = 0;
-	if (!src)
-		return (0);
-	while (src[len])
-		len++;
-	if (!(cpy = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
-	len = 0;
-	while (src[len])
-	{
-		cpy[len] = src[len];
-		len++;
-	}
-	cpy[len] = '\0';
-	return (cpy);
+	write(1, &c, 1);
 }
 
-int						ft_strlen(char *str)
+void			ft_putstr(char *str)
+{
+	int		i;
+	char	*mem;
+
+	i = 0;
+	mem = str;
+	while (*str)
+	{
+		i++;
+		str++;
+	}
+	write(1, mem, i);
+}
+
+void			ft_putnbr(int nb)
+{
+	long	n;
+	int		d;
+
+	d = 1000000000;
+	n = nb;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = n * -1;
+	}
+	if (n == 0)
+	{
+		ft_putchar('0');
+		return ;
+	}
+	while (d > 0)
+	{
+		if (n >= d)
+			ft_putchar('0' + (n / d % 10));
+		d /= 10;
+	}
+}
+
+void			ft_show_tab(struct s_stock_str *par)
 {
 	int i;
 
 	i = 0;
-	while (*str)
+	while (par[i].str != 0)
 	{
-		str++;
+		ft_putstr(par[i].str);
+		ft_putchar('\n');
+		ft_putnbr(par[i].size);
+		ft_putchar('\n');
+		ft_putstr(par[i].copy);
+		ft_putchar('\n');
 		i++;
 	}
-	return (i);
-}
-
-struct s_stock_str		*ft_strs_to_tab(int ac, char **av)
-{
-	int					j;
-	struct s_stock_str	*tab;
-
-	j = 0;
-	if (!(tab = (t_stock_str *)malloc(sizeof(t_stock_str) * ac + 1)))
-		return (NULL);
-	while (j < ac)
-	{
-		tab[j].str = av[j];
-		tab[j].size = ft_strlen(av[j]);
-		tab[j].copy = ft_strdup(av[j]);
-		j++;
-	}
-	tab[j].str = 0;
-	return (tab);
 }
 
 

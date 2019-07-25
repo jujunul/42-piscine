@@ -6,7 +6,7 @@
 /*   By: jthierry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 21:35:38 by jthierry          #+#    #+#             */
-/*   Updated: 2019/07/25 00:53:36 by jthierry         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:57:36 by jthierry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,3 @@ struct s_stock_str		*ft_strs_to_tab(int ac, char **av)
 }
 
 
-int main(int ac, char **av)
-{
-	t_stock_str *str;
-
-
-	str = ft_strs_to_tab(ac, av);
-	av[0][0] = 'h';
-	av[0][1] = 'e';
-	av[0][2] = 'l';
-	av[0][3] = 'l';
-	av[0][4] = 'o';
-	av[0][5] = 'o';
-	av[0][6] = 'o';
-	ft_show_tab(str);
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: jthierry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 18:45:45 by jthierry          #+#    #+#             */
-/*   Updated: 2019/07/20 17:42:37 by jthierry         ###   ########.fr       */
+/*   Updated: 2019/07/22 23:39:42 by jthierry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ unsigned int			ft_biglen(int size, char **strs, char *sep)
 			len++;
 		}
 		i++;
+		len++;
 		if (i != (unsigned int)size)
-			len = len + lensep;
+			len = len + lensep + 1;
 	}
 	return (len);
 }
@@ -80,4 +81,9 @@ char					*ft_strjoin(int size, char **strs, char *sep)
 			ft_strcat(result, sep);
 	}
 	return (result);
+}
+
+int		main(int ac, char **av)
+{
+	printf("%s\n", ft_strjoin(ac, av, "|"));
 }
